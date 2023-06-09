@@ -1,4 +1,4 @@
-import {throttle} from 'lodash.throttle';
+import throttle from 'lodash.throttle';
 import Player from '@vimeo/player';
 
  //ключом для хранилища будет строка "videoplayer-current-time" , ключ локал.хранилища
@@ -9,6 +9,8 @@ const player = new Player(iframe);
 //время воспроизведения обновлялось в хранилище не чаще чем раз в секунд
 
 // используем метод on() и подписываем дату обновления
+
+
 player.on('timeupdate', throttle(videoPlayerTimeUpdate, 1000));
 
 function videoPlayerTimeUpdate(data) {

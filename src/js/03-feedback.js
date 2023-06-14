@@ -12,7 +12,7 @@ import throttle from 'lodash.throttle';
 const STOR_KEY_INPUT = 'feedback-form-state';
 
 const form = document.querySelector('.feedback-form');
-const input4Email = document.querySelector('input');
+const inputEmail = document.querySelector('input');
 const textAria = document.querySelector('.textaria');
 
 form.addEventListener('input', throttle(setCurrentValue, 500));
@@ -25,14 +25,14 @@ function getDateOfFeedback() {
     const getFormData = localStorage.getItem(STOR_KEY_INPUT);
     const formDataPj = JSON.parse(getFormData);
     if (getFormData) {
-        input4Email.value = formDataPj.email;
+        inputEmail.value = formDataPj.email;
         textAria.value = formDataPj.message;
     }
 };
 
 function setCurrentValue(e) {
-    if (input4Email.value !== '' || textAria.value !== '') {
-        formData.email = input4Email.value;
+    if (inputEmail.value !== '' || textAria.value !== '') {
+        formData.email = inputEmail.value;
         formData.message = textAria.value;
         const formDataJ = JSON.stringify(formData);
         localStorage.setItem(STOR_KEY_INPUT, formDataJ);
@@ -41,11 +41,11 @@ function setCurrentValue(e) {
 
 function submitValues(event) {
     event.preventDefault();
-    if (input4Email.value === '' || textAria.value === '') {
+    if (inputEmail.value === '' || textAria.value === '') {
         return alert ('Please fill in all required fields!')
  } else {
         showEmptyFbForm();
-        input4Email.value = '';
+        inputEmail.value = '';
         textAria.value = '';
         localStorage.removeItem(STOR_KEY_INPUT);
     }

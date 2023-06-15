@@ -13,48 +13,48 @@ const STOR_KEY_INPUT = 'feedback-form-state';
 
 const form = document.querySelector('.feedback-form');
 const inputEmail = document.querySelector('input');
-const textAria = document.querySelector('.textaria');
+const textArea = document.querySelector('textarea');
 
 form.addEventListener('input', throttle(setCurrentValue, 500));
 form.addEventListener('submit', submitValues);
 
-const formData = {};
+const feedBack = {};
 
 getDateOfFeedback();
 function getDateOfFeedback() {
-    const getFormData = localStorage.getItem(STOR_KEY_INPUT);
-    const formDataPj = JSON.parse(getFormData);
-    if (getFormData) {
-        inputEmail.value = formDataPj.email;
-        textAria.value = formDataPj.message;
+    const getFeedBack = localStorage.getItem(STOR_KEY_INPUT);
+    const feedBackParseJSON = JSON.parse(getFeedBack);
+    if (getFeedBack) {
+        inputEmail.value = feedBackParseJSON.email;
+        textArea.value = feedBackParseJSON.message;
     }
 };
 
 function setCurrentValue(e) {
-    if (inputEmail.value !== '' || textAria.value !== '') {
-        formData.email = inputEmail.value;
-        formData.message = textAria.value;
-        const formDataJ = JSON.stringify(formData);
-        localStorage.setItem(STOR_KEY_INPUT, formDataJ);
+    if (inputEmail.value !== '' || textArea.value !== '') {
+      feedBack.email = inputEmail.value;
+      feedBack.message = textArea.value;
+      const feedBackJSON = JSON.stringify(feedBack);
+      localStorage.setItem(STOR_KEY_INPUT, feedBackJSON);
     }
 };
 
 function submitValues(event) {
     event.preventDefault();
-    if (inputEmail.value === '' || textAria.value === '') {
-        return alert ('Please fill in all required fields!')
- } else {
-        showEmptyFbForm();
-        inputEmail.value = '';
-        textAria.value = '';
-        localStorage.removeItem(STOR_KEY_INPUT);
+    if (inputEmail.value === '' || textArea.value === '') {
+      return alert('Please fill in all required fields!');
+    } else {
+      showEmptyFbForm();
+      inputEmail.value = '';
+      textArea.value = '';
+      localStorage.removeItem(STOR_KEY_INPUT);
     }
 };
 
 function showEmptyFbForm() {
-    const formDataCheckup = localStorage.getItem(STOR_KEY_INPUT);
-    const fbP_JSON = JSON.parse(formDataCheckup);
-    if (formDataCheckup) {
-        console.log(fbP_JSON);
+    const checkFeedback = localStorage.getItem(STOR_KEY_INPUT);
+    const feedBackParseJSON = JSON.parse(checkFeedback);
+    if (checkFeedback) {
+        console.log(feedBackParseJSON);
     }
 };
